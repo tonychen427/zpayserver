@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "43563062079",
+    "firebase_url": "https://zpay-4b5d6.firebaseio.com",
+    "project_id": "zpay-4b5d6",
+    "storage_bucket": "zpay-4b5d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43563062079:android:8eb3b75999e87449",
+        "android_client_info": {
+          "package_name": "com.clientsbox.zpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43563062079-m3dh0s312e3v9sqlaj62irrhnud9m6ju.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "43563062079-jk880c7vja5p0tafdsuf0kqnr5j3ber2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARycfnOpIoJaES4XqppVqk3opemOFbA_c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
