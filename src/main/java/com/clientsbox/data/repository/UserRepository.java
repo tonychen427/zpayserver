@@ -40,20 +40,21 @@ public class UserRepository implements IUserRepository {
     public void updateUser(User mUser, UserSession mUserSession) {
 
         ClassLoader classLoader = getClass().getClassLoader();
-        String Url = classLoader.getResource("serviceAccountCredentials.json").getPath();
+        String Url = classLoader.getResource("serviceAccountCredentials-zpayworld.json").getPath();
 
         try {
             FirebaseOptions options;
             options = new FirebaseOptions.Builder()
                     .setServiceAccount(new FileInputStream(Url))
-                    .setDatabaseUrl("https://zpay-4b5d6.firebaseio.com/")
+                    //.setDatabaseUrl("https://zpay-4b5d6.firebaseio.com/")
+                    .setDatabaseUrl("https://zpayworld-1339.firebaseio.com")
                     .build();
             FirebaseApp.initializeApp(options);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("oAuthRecord/");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/");
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
