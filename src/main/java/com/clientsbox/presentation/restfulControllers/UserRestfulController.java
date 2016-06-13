@@ -3,6 +3,7 @@ package com.clientsbox.presentation.restfulControllers;
 import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.logic.services.IUserService;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,12 @@ public class UserRestfulController {
 
     @Autowired
     IUserService _userServices;
+      @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> getUserList() {
+       
+       return new ResponseEntity<>(_userServices.getUsers(), HttpStatus.OK);
+    }
+    
     
     @RequestMapping(value = "/user/{id}/userSession", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserSession> getUserSession(@PathVariable("id") String id) {

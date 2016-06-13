@@ -7,9 +7,12 @@ package com.clientsbox.logic.services;
 
 import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
+import java.util.List;
 
 public interface IUserService {
 
+    public List<User> getUsers();
+    
     public UserSession getUserSessionByUsernamePassword(User mUser);
     public UserSession registerUser(User mUser);
     
