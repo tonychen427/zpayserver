@@ -1,157 +1,164 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title></title>
-    <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
-    <link rel='stylesheet' type='text/css' href='css/styles.css' />
-    <script src='https://code.jquery.com/jquery-2.2.4.min.js' integrity='sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=' crossorigin='anonymous'></script>
-    <script type="text/javascript" src='js/SlidesJS.min.js'></script>
-    <script type="text/javascript" src='js/main.js'></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Parallax Template - Materialize</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-
 <body>
-    <header>
-        zPay - GET PAID IN A SNAP
-    </header>
-    <div class="login">
-        <div class="questionWrapper pull-right" ripple><i class="fa fa-question"></i></div>
-        <div id="slides">
-            <div>
-                <div class="photoLogoWrapper">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="subTitle">Sign in with your zPay Account</div>
-                <form action="" id="login-form">
-                    <div id="u" class="form-group">
-                        <input id="username" spellcheck=false class="form-control" name="username" type="text" size="18" alt="login" required="">
-                        <span class="form-highlight"></span>
-                        <span class="form-bar"></span>
-                        <label for="username" class="float-label">Email</label>
-                        <erroru>
-                            Username is required
-                            <i>   
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                  <path d="M0 0h24v24h-24z" fill="none"/>
-                                  <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                              </svg>
-                            </i>
-                        </erroru>
-                    </div>
-                    <div id="p" class="form-group">
-                        <input id="password" class="form-control" spellcheck=false name="password" type="password" size="18" alt="login" required="">
-                        <span class="form-highlight"></span>
-                        <span class="form-bar"></span>
-                        <label for="password" class="float-label">Password</label>
-                        <errorp>
-                            Password is required
-                            <i>   
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                  <path d="M0 0h24v24h-24z" fill="none"/>
-                                  <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                              </svg>
-                            </i>
-                        </errorp>
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" id="rem">
-                        <label for="rem">Stay Signed in</label>
-                        <button id="submit" type="submit" ripple>Sign in</button>
-                    </div>
-                </form>
-            </div>
-            <div>
-                <div class="subTitle">Create A Account</div>
-                <form action="" id="login-form">
-                    <div id="u" class="form-group">
-                        <input id="username" spellcheck=false class="form-control" name="username" type="text" size="18" alt="login" required="">
-                        <span class="form-highlight"></span>
-                        <span class="form-bar"></span>
-                        <label for="username" class="float-label">First name</label>
-                        <erroru>
-                            First name is required
-                            <i>   
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                  <path d="M0 0h24v24h-24z" fill="none"/>
-                                  <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                              </svg>
-                            </i>
-                        </erroru>
-                    </div>
-                    <div id="u" class="form-group">
-                        <input id="username" spellcheck=false class="form-control" name="username" type="text" size="18" alt="login" required="">
-                        <span class="form-highlight"></span>
-                        <span class="form-bar"></span>
-                        <label for="username" class="float-label">Last name</label>
-                        <erroru>
-                            Last name is required
-                            <i>   
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                  <path d="M0 0h24v24h-24z" fill="none"/>
-                                  <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                              </svg>
-                            </i>
-                        </erroru>
-                    </div>
-                    <div id="u" class="form-group">
-                        <input id="username" spellcheck=false class="form-control" name="username" type="text" size="18" alt="login" required="">
-                        <span class="form-highlight"></span>
-                        <span class="form-bar"></span>
-                        <label for="username" class="float-label">Email</label>
-                        <erroru>
-                            Email is required
-                            <i>   
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                  <path d="M0 0h24v24h-24z" fill="none"/>
-                                  <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                              </svg>
-                            </i>
-                        </erroru>
-                    </div>
-                    <div id="u" class="form-group">
-                        <input id="username" spellcheck=false class="form-control" name="username" type="text" size="18" alt="login" required="">
-                        <span class="form-highlight"></span>
-                        <span class="form-bar"></span>
-                        <label for="username" class="float-label">Phone #</label>
-                        <erroru>
-                            Phone # is required
-                            <i>   
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                  <path d="M0 0h24v24h-24z" fill="none"/>
-                                  <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                              </svg>
-                            </i>
-                        </erroru>
-                    </div>
-                    <div id="u" class="form-group">
-                        <input id="username" spellcheck=false class="form-control" name="username" type="text" size="18" alt="login" required="">
-                        <span class="form-highlight"></span>
-                        <span class="form-bar"></span>
-                        <label for="username" class="float-label">Invite Code (Options)</label>
-                        <erroru>
-                           Invite Code
-                            <i>   
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                  <path d="M0 0h24v24h-24z" fill="none"/>
-                                  <path d="M1 21h22l-11-19-11 19zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-                              </svg>
-                            </i>
-                        </erroru>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <footer>
-            <div id="second">Create an new account</div>
-            <div id="first">Cancel</div>
-        </footer>
-    </div>
-    <p class='copyright'>
-        <span>
-      Copyright © 2016 zPay. All rights reserved. Version 1.0.0
-    </span>
-        <!-- 
-        <span>Pen Designed by <a href="https://dribbble.com/JasonZigrino">Jason Zigrino</a> and Developed by <a href="http://codepen.io/Himateja" target="_blank">Himateja</a> | <a href="http://twitter.com/iamhimateja" target="_blank">@iamhimateja</a> | <a href="http://www.himateja.in" target="_blank">Go to himateja.in</a></span> -->
-    </p>
-</body>
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">zPay</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
 
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">Navbar Link</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+  <div id="index-banner" class="parallax-container">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <br><br>
+        <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        </div>
+        <div class="row center">
+          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+        </div>
+        <br><br>
+
+      </div>
+    </div>
+    <div class="parallax"><img src="images/background1.jpg" alt="Unsplashed background img 1"></div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Speeds up development</h5>
+
+            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">User Experience Focused</h5>
+
+            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Easy to work with</h5>
+
+            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="images/background2.jpg" alt="Unsplashed background img 2"></div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+
+      <div class="row">
+        <div class="col s12 center">
+          <h3><i class="mdi-content-send brown-text"></i></h3>
+          <h4>Contact Us</h4>
+          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+      <div class="container">
+        <div class="row center">
+          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+        </div>
+      </div>
+    </div>
+    <div class="parallax"><img src="images/background3.jpg" alt="Unsplashed background img 3"></div>
+  </div>
+
+  <footer class="page-footer teal">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Company Bio</h5>
+          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Settings</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Link 1</a></li>
+            <li><a class="white-text" href="#!">Link 2</a></li>
+            <li><a class="white-text" href="#!">Link 3</a></li>
+            <li><a class="white-text" href="#!">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
 </html>
