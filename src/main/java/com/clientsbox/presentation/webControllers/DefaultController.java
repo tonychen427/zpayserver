@@ -17,9 +17,9 @@ public class DefaultController {
     }
     
     @RequestMapping(value = "/{name:.+}", method = RequestMethod.GET)
-    public String spaIndex(@PathVariable("name") String name, ModelMap model) {
+    public String spaIndex(@PathVariable("name") String appName, ModelMap model) {
         //  User mUser = _userSerice.GetUserById(0);
-        model.addAttribute("application", name);
-        return "index";
+        model.addAttribute("application", appName);
+        return appName;
     }
 }

@@ -42,7 +42,7 @@ public class UserRestfulController {
     }
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserSession> getUserLogin(@RequestBody User mUser ) {
+    public ResponseEntity<UserSession> getUserLogin(@RequestBody User mUser) {
         
         UserSession mUserSession = _userServices.getUserSessionByUsernamePassword(mUser);
         return new ResponseEntity<>(mUserSession, HttpStatus.OK);        
