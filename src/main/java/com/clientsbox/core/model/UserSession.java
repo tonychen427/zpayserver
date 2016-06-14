@@ -3,6 +3,7 @@ package com.clientsbox.core.model;
 public class UserSession {
    
     public String userId;
+    public String targetURL;
     public String accessToken;
     public String mAuthorizationKey;
 
@@ -12,6 +13,14 @@ public class UserSession {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getTargetURL() {
+        return targetURL;
+    }
+
+    public void setTargetURL(String targetURL) {
+        this.targetURL = targetURL;
     }
 
     public String getAccessToken() {
@@ -29,5 +38,8 @@ public class UserSession {
     public void setmAuthorizationKey(String mAuthorizationKey) {
         this.mAuthorizationKey = mAuthorizationKey;
     }
+
+  
+    
     
 }

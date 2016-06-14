@@ -5,7 +5,7 @@ import java.util.List;
 public class FirebaseCloudMessage {
     
     public String data;
-    public List<String> deviceRegistrationTokens;
+    public List<String> fcm_deviceRegIds;
 
     public String getData() {
         return data;
@@ -15,12 +15,12 @@ public class FirebaseCloudMessage {
         this.data = data;
     }
 
-    public List<String> getDeviceRegistrationTokens() {
-        return deviceRegistrationTokens;
+    public List<String> getFcm_deviceRegIds() {
+        return fcm_deviceRegIds;
     }
 
-    public void setDeviceRegistrationTokens(List<String> deviceRegistrationTokens) {
-        this.deviceRegistrationTokens = deviceRegistrationTokens;
+    public void setFcm_deviceRegIds(List<String> fcm_deviceRegIds) {
+        this.fcm_deviceRegIds = fcm_deviceRegIds;
     }
-    
+ 
 }

@@ -4,13 +4,6 @@ import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.helper.HttpConnectionHelper;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,8 +18,8 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
 
     @Override
     public List<User> getAllUsers(UserSession mUserSession) {
-
-        String result = this.sendGet("https://zpayworld-1339.firebaseio.com/Users.json");
+        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/Users.json");
+        String result = this.sendGet(mUserSession);
 
         Gson gson = new Gson();
         List<User> mUserList = new ArrayList<>();
@@ -59,11 +52,13 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     public void createUser(User mUser, UserSession mUserSession) {
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
-
+        
+        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/Users.json");
+        
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
 
-            this.sendPost("https://zpayworld-1339.firebaseio.com/Users.json", array.getJSONObject(0));
+            this.sendPost(mUserSession, array.getJSONObject(0));
         } catch (JSONException ex) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,7 +72,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
 
-            this.sendPut("https://zpayworld-1339.firebaseio.com/Users/" + mUser.id +".json", array.getJSONObject(0));
+            //this.sendPut("https://zpayworld-1339.firebaseio.com/Users/" + mUser.id +".json", array.getJSONObject(0));
         } catch (JSONException ex) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }

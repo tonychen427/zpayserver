@@ -1,0 +1,41 @@
+
+package com.clientsbox.logic.services;
+
+import com.clientsbox.core.model.APIProvisioning;
+import com.clientsbox.data.repository.IAPIProvisioningRepository;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class APIProvisioningService implements IAPIProvisioningService{
+
+    @Autowired
+    IAPIProvisioningRepository _apiProvisioningRepository;
+    
+    @Override
+    public List<APIProvisioning> getAllAPIProvisioning() {
+        return _apiProvisioningRepository.getAllAPIProvisioning();
+    }
+
+    @Override
+    public APIProvisioning getAPIProvisioningById(String id) {
+        return _apiProvisioningRepository.getAPIProvisioningById(id);
+    }
+
+    @Override
+    public void insertAPIProvisioning(APIProvisioning mAPIProvisioning) {
+        _apiProvisioningRepository.insertAPIProvisioning(mAPIProvisioning);
+    }
+
+    @Override
+    public void updateAPIProvisioning(APIProvisioning mAPIProvisioning) {
+        _apiProvisioningRepository.updateAPIProvisioning(mAPIProvisioning);
+    }
+
+    @Override
+    public void deleteAPIProvisioning(String Id) {
+        _apiProvisioningRepository.deleteAPIProvisioning(Id);
+    }
+
+}

@@ -1,11 +1,13 @@
 package com.clientsbox.core.model;
 
 public class User {
+
     public String id;
     public String username;
     public String password;
     public String email;
-    public String gcm_registeration_id;
+    public String mobile;
+    public String fcm_deviceRegId;
 
     public String getId() {
         return id;
@@ -39,14 +41,20 @@ public class User {
         this.email = email;
     }
 
-    public String getGcm_registeration_id() {
-        return gcm_registeration_id;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setGcm_registeration_id(String gcm_registeration_id) {
-        this.gcm_registeration_id = gcm_registeration_id;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
-    
-    
+
+    public String getFcm_deviceRegId() {
+        return fcm_deviceRegId;
+    }
+
+    public void setFcm_deviceRegId(String fcm_deviceRegId) {
+        this.fcm_deviceRegId = fcm_deviceRegId;
+    }
     
 }

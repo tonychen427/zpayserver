@@ -3,65 +3,53 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.clientsbox.data.repository.helper;
+package com.clientsbox.data.repository;
 
-import com.clientsbox.core.model.UserSession;
+import java.util.List;
+import com.clientsbox.core.model.APIProvisioning;
+import com.google.gson.Gson;
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import org.json.JSONObject;
+import org.json.JSONArray;
+import org.springframework.stereotype.Repository;
 
-public class HttpConnectionHelper {
-
-    private final String USER_AGENT = "Mozilla/5.0";
-
-    // HTTP GET request
-    protected String sendGet(UserSession mUserSession) {
-
-        HttpURLConnection connection = null;
-        StringBuilder response;
-        try {
-            //Create connection
-            URL url = new URL(mUserSession.getTargetURL());
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Content-Type", "application/json");
-            InputStream is = connection.getInputStream();
-            try (BufferedReader rd = new BufferedReader(new InputStreamReader(is))) {
-                response = new StringBuilder(); // or StringBuffer if not Java 5+
-                String line;
-                while ((line = rd.readLine()) != null) {
-                    response.append(line);
-                    response.append('\r');
-                }
-            } // or StringBuffer if not Java 5+
-
-        } catch (Exception e) {
-            return null;
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-        return response.toString();
+@Repository
+public class APIProvisioningRepository implements IAPIProvisioningRepository{
+    
+    public static final String firebaseRealtimeDatabaseUrl = "https://zpayworld-1339.firebaseio.com/APIProvisioning.json";
+    
+    
+    @Override
+    public List<APIProvisioning> getAllAPIProvisioning() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    protected void sendPost(UserSession mUserSession, JSONObject json) {
+    @Override
+    public APIProvisioning getAPIProvisioningById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void insertAPIProvisioning(APIProvisioning mAPIProvisioning) {
+                
         HttpURLConnection connection = null;
         try {
-            URL url = new URL(mUserSession.getTargetURL());
+            URL url = new URL(firebaseRealtimeDatabaseUrl);
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
-            //connection.setRequestProperty("Authorization", "key=" + gcm.getGcmAPIKey());
+            connection.setRequestProperty("Accept", "application/json");            
             OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-            streamWriter.write(json.toString());
+            
+            Gson gson = new Gson();
+            String mData = gson.toJson(mAPIProvisioning);
+            JSONArray array = new JSONArray("[" + mData + "]");            
+            streamWriter.write(array.getJSONObject(0).toString());
             streamWriter.flush();
             StringBuilder stringBuilder = new StringBuilder();
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -88,6 +76,18 @@ public class HttpConnectionHelper {
                 connection.disconnect();
             }
         }
+        
     }
 
+    @Override
+    public void updateAPIProvisioning(APIProvisioning mAPIProvisioning) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteAPIProvisioning(String Id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 }

@@ -22,13 +22,12 @@ public class UserRestfulController {
 
     @Autowired
     IUserService _userServices;
-      @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<User>> getUserList() {
-       
+    
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<User>> getUserList() {       
        return new ResponseEntity<>(_userServices.getUsers(), HttpStatus.OK);
     }
-    
-    
+        
     @RequestMapping(value = "/user/{id}/userSession", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserSession> getUserSession(@PathVariable("id") String id) {
         UserSession mUserSession = new UserSession();
@@ -55,7 +54,7 @@ public class UserRestfulController {
         return new ResponseEntity<>(mUserSession, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/user/{id}/gcmRegistrationId", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user/{id}/fcmRegistrationId", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createGCMRegistrationByUserId(@PathVariable("id") String id, @RequestHeader(value="accessToken") String accessToken, @RequestBody String GCMRegistrationId ) {
         
         _userServices.updateGCMRegistrationIdByUserId(id, GCMRegistrationId);
