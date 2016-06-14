@@ -3,6 +3,9 @@ package com.clientsbox.data.repository;
 import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.helper.HttpConnectionHelper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -22,28 +26,27 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     @Override
     public List<User> getAllUsers(UserSession mUserSession) {
 
-        String jsonStr = "[  "
-                + " {"
-                + "   \"data\": {"
-                + "       \"title\": \"Test Title\","
-                + "       \"body\": \"hello\""
-                + "   },"
-                + " }]";
+        String result = this.sendGet("https://zpayworld-1339.firebaseio.com/Users.json");
 
+        Gson gson = new Gson();
+        List<User> mUserList = new ArrayList<>();
+
+        JSONObject UserJsonObj;
         try {
-            JSONArray array = new JSONArray(jsonStr);
-            this.sendPost("https://zpayworld-1339.firebaseio.com/Users.json", array.getJSONObject(0));
+            UserJsonObj = new JSONObject(result);
+
+            for (int i = 0; i < UserJsonObj.names().length(); i++) {
+                String data = "key = " + UserJsonObj.names().getString(i) + " value = " + UserJsonObj.get(UserJsonObj.names().getString(i));
+                String mKey = UserJsonObj.names().getString(i);
+                String mValue = UserJsonObj.get(UserJsonObj.names().getString(i)).toString();
+                User mUser = gson.fromJson(mValue, User.class);
+                mUser.setId(mKey);
+                mUserList.add(mUser);
+            }
         } catch (JSONException ex) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String resutl = this.sendGet("https://zpayworld-1339.firebaseio.com/Users.json");
-
-        List<User> mUserList;
-        mUserList = new ArrayList<>();
-        User mUser = new User();
-        mUser.setUsername(resutl);
-        mUserList.add(mUser);
         return mUserList;
     }
 
@@ -54,12 +57,30 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
 
     @Override
     public void createUser(User mUser, UserSession mUserSession) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Gson gson = new Gson();
+        String mData = gson.toJson(mUser);
+
+        try {
+            JSONArray array = new JSONArray("[" + mData + "]");
+
+            this.sendPost("https://zpayworld-1339.firebaseio.com/Users.json", array.getJSONObject(0));
+        } catch (JSONException ex) {
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void updateUser(User mUser, UserSession mUserSession) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Gson gson = new Gson();
+        String mData = gson.toJson(mUser);
+
+        try {
+            JSONArray array = new JSONArray("[" + mData + "]");
+
+            this.sendPut("https://zpayworld-1339.firebaseio.com/Users/" + mUser.id +".json", array.getJSONObject(0));
+        } catch (JSONException ex) {
+            Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

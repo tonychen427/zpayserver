@@ -48,10 +48,51 @@ public class HttpConnectionHelper {
         return response.toString();
     }
 
+    protected void sendPut(String targetURL, JSONObject json) {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(targetURL);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            //connection.setRequestProperty("Authorization", "key=" + gcm.getGcmAPIKey());
+            OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
+            streamWriter.write(json.toString());
+            streamWriter.flush();
+            StringBuilder stringBuilder = new StringBuilder();
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
+                try (BufferedReader bufferedReader = new BufferedReader(streamReader)) {
+                    String response;
+                    while ((response = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(response).append("\n");
+                    }
+                    bufferedReader.close();
+
+                    //Log.d("test", stringBuilder.toString());
+                    //return stringBuilder.toString();
+                }
+            } else {
+                //Log.e("test", connection.getResponseMessage());
+                //return null;
+            }
+        } catch (Exception exception) {
+            //Log.e("test", exception.toString());
+            //return null;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
     protected void sendPost(String targetURL, JSONObject json) {
         HttpURLConnection connection = null;
         try {
-            URL url=new URL(targetURL);
+            URL url = new URL(targetURL);
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);
@@ -63,7 +104,7 @@ public class HttpConnectionHelper {
             streamWriter.write(json.toString());
             streamWriter.flush();
             StringBuilder stringBuilder = new StringBuilder();
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
                 try (BufferedReader bufferedReader = new BufferedReader(streamReader)) {
                     String response;
@@ -71,7 +112,7 @@ public class HttpConnectionHelper {
                         stringBuilder.append(response).append("\n");
                     }
                     bufferedReader.close();
-                    
+
                     //Log.d("test", stringBuilder.toString());
                     //return stringBuilder.toString();
                 }
@@ -79,13 +120,14 @@ public class HttpConnectionHelper {
                 //Log.e("test", connection.getResponseMessage());
                 //return null;
             }
-        } catch (Exception exception){
+        } catch (Exception exception) {
             //Log.e("test", exception.toString());
             //return null;
         } finally {
-            if (connection != null){
+            if (connection != null) {
                 connection.disconnect();
             }
         }
     }
+
 }
