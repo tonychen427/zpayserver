@@ -33,15 +33,15 @@ POST: http://localhost:8080/api/user/
 
 ```
 
-PUT: http://localhost:8080/api/user/
+PUT: http://localhost:8080/api/user/{id}
 ```json
 
   {
-    "firstname": "John",
+    "firstname": "Marry",
     "lastname": "Smith",
-    "username": "jsmith",
+    "username": "msmith",
     "password": "welcome123",
-    "email": "john.smith@zpay.com",
+    "email": "marry.smith@zpay.com",
     "mobile": "408-000-8888",
     "userCategory": "client",
     "fcm_deviceRegId": "ab4801f0-331d-11e6-bdf4-0852698d45d2"
