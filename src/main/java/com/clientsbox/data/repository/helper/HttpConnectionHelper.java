@@ -48,20 +48,19 @@ public class HttpConnectionHelper {
         }
         return response.toString();
     }
-
-    protected String sendPost(UserSession mUserSession, JSONObject json) {
-        HttpURLConnection connection = null;
+    protected String setPut(UserSession mUserSession) {
+         HttpURLConnection connection = null;
         try {
             URL url = new URL(mUserSession.getTargetURL());
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setDoInput(true);
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod("PUT");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Accept", "application/json");
             //connection.setRequestProperty("Authorization", "key=" + gcm.getGcmAPIKey());
             OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
-            streamWriter.write(json.toString());
+            streamWriter.write( mUserSession.getData().toString());
             streamWriter.flush();
             StringBuilder stringBuilder = new StringBuilder();
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -83,6 +82,67 @@ public class HttpConnectionHelper {
         } catch (Exception exception) {
             //Log.e("test", exception.toString());
             return null;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+    protected String sendPost(UserSession mUserSession) {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(mUserSession.getTargetURL());
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            //connection.setRequestProperty("Authorization", "key=" + gcm.getGcmAPIKey());
+            OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
+            streamWriter.write( mUserSession.getData().toString());
+            streamWriter.flush();
+            StringBuilder stringBuilder = new StringBuilder();
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
+                try (BufferedReader bufferedReader = new BufferedReader(streamReader)) {
+                    String response;
+                    while ((response = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(response).append("\n");
+                    }
+                    bufferedReader.close();
+
+                    //Log.d("test", stringBuilder.toString());
+                    return stringBuilder.toString();
+                }
+            } else {
+                //Log.e("test", connection.getResponseMessage());
+                return null;
+            }
+        } catch (Exception exception) {
+            //Log.e("test", exception.toString());
+            return null;
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    protected int sendDelete(UserSession mUserSession) {
+        HttpURLConnection connection = null;
+        int responseCode = HttpURLConnection.HTTP_NOT_FOUND;
+        try {
+            URL url = new URL(mUserSession.getTargetURL());
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Content-Type", "application/json");
+            responseCode = connection.getResponseCode();
+            return responseCode;
+        } catch (Exception exception) {
+            return responseCode;
         } finally {
             if (connection != null) {
                 connection.disconnect();

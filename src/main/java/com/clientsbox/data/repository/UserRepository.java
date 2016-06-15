@@ -4,6 +4,7 @@ import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.helper.HttpConnectionHelper;
 import com.google.gson.Gson;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,7 +19,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
 
     @Override
     public List<User> getAllUsers(UserSession mUserSession) {
-        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/Users.json");
+        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users.json");
         String result = this.sendGet(mUserSession);
 
         Gson gson = new Gson();
@@ -45,20 +46,30 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
 
     @Override
     public User getUserById(String id, UserSession mUserSession) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Gson gson = new Gson();
+        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users/" + id + ".json");
+        String result = this.sendGet(mUserSession);
+        User mUser = gson.fromJson(result, User.class);
+        mUser.setId(id);
+        return mUser;
+
     }
 
     @Override
     public String insertUser(User mUser, UserSession mUserSession) {
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
-        
-        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/Users.json");
-        
+
+        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users.json");
+
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
-
-            return this.sendPost(mUserSession, array.getJSONObject(0));
+            mUserSession.setData(array.getJSONObject(0));
+            String returnData = this.sendPost(mUserSession);
+            JSONObject jsonObj = new JSONObject(returnData);
+            String userId = jsonObj.getString("name");
+            return userId;
         } catch (JSONException ex) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,27 +77,27 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     }
 
     @Override
-    public void updateUser(User mUser, UserSession mUserSession) {
-         Gson gson = new Gson();
+    public User updateUser(User mUser, UserSession mUserSession) {
+        Gson gson = new Gson();
         String mData = gson.toJson(mUser);
-
+        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users/" + mUser.getId() + ".json");
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
-
-            //this.sendPut("https://zpayworld-1339.firebaseio.com/Users/" + mUser.id +".json", array.getJSONObject(0));
+            mUserSession.setData(array.getJSONObject(0));
+            String returnData = this.setPut(mUserSession);
+            User mUpdateUser = gson.fromJson(returnData, User.class);  
+            mUpdateUser.setId(mUser.getId());
+            return mUpdateUser;
         } catch (JSONException ex) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+        return null;
+    }   
 
     @Override
-    public void deleteUser(String id, UserSession mUserSession) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public User getUserInfoByUsernamePassword(String mUsername, String Password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteUser(String id, UserSession mUserSession) {
+        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users/" + id + ".json");
+        return this.sendDelete(mUserSession) == HttpURLConnection.HTTP_OK;
     }
 
 }

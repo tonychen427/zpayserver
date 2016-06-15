@@ -1,12 +1,10 @@
 package com.clientsbox.logic.services;
 
-import com.clientsbox.core.model.APIProvisioning;
 import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.IAPIProvisioningRepository;
 import com.clientsbox.data.repository.IUserRepository;
 import java.util.List;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,25 +30,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void insertUser(User mUser) {
+    public String insertUser(User mUser) {
         UserSession mUserSession = new UserSession();
-        String insertId = _userRepository.insertUser(mUser, mUserSession);
-        APIProvisioning mAPIProvisioning = new APIProvisioning();
-        mAPIProvisioning.setUserId(insertId);
-        mAPIProvisioning.setAuthorizationKey(UUID.randomUUID().toString());
-        _IAPIProvisioningRepository.insertAPIProvisioning(null);
+        return _userRepository.insertUser(mUser, mUserSession);
     }
 
     @Override
-    public void updateUser(User mUser) {
+    public User updateUser(User mUser) {
         UserSession mUserSession = new UserSession();
-        _userRepository.updateUser(mUser, mUserSession);
+        return _userRepository.updateUser(mUser, mUserSession);        
     }
 
     @Override
-    public void deleteUser(String Id) {
+    public boolean deleteUser(String Id) {
         UserSession mUserSession = new UserSession();
-        _userRepository.deleteUser(null, mUserSession);
+        return _userRepository.deleteUser(Id, mUserSession);
     }
 
 }

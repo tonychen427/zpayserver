@@ -12,8 +12,8 @@ public interface IUserService {
 
     public List<User> getUsers();
     public User getUserById(String id);
-    public void insertUser(User mUser);
-    public void updateUser(User mUser);
-    public void deleteUser(String Id);
+    public String insertUser(User mUser);
+    public User updateUser(User mUser);
+    public boolean deleteUser(String Id);
     
 }

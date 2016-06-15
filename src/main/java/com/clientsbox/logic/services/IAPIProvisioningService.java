@@ -16,7 +16,6 @@ public interface IAPIProvisioningService {
 
     public void deleteAPIProvisioning(String Id);
     
-    
-    public APIProvisioning getAPIProvisioningInfoByUsernamePassword(String mUsername, String Password);
+
    
 }

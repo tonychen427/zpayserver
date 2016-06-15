@@ -42,10 +42,4 @@ public class APIProvisioningService implements IAPIProvisioningService {
         _apiProvisioningRepository.deleteAPIProvisioning(Id);
     }
 
-    @Override
-    public APIProvisioning getAPIProvisioningInfoByUsernamePassword(String mUsername, String Password) {
-        User mUser = _userRepository.getUserInfoByUsernamePassword(mUsername, Password);
-        APIProvisioning mAPIProvisioning = this.getAPIProvisioningById(mUser.getId());
-        return mAPIProvisioning;
-    }
 }

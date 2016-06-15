@@ -23,70 +23,116 @@ public class UserRestfulController {
 
     @Autowired
     IUserService _userServices;
-    
+
     @Autowired
     IAPIProvisioningService _APIProvisioningService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<User>> getUserList(@RequestHeader("Authorization") String apiKey) {
+    public ResponseEntity<UserSession> getUserList(@RequestHeader("Authorization") String apiKey) {
+
+        UserSession mUserSession = new UserSession();
+        mUserSession.setTargetURL("/api/users");
+        mUserSession.setUserId("");
+        mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
+
         if (apiKey.equals(SystemInfo.authorizationKey)) {
-            return new ResponseEntity<>(_userServices.getUsers(), HttpStatus.OK);
+            List<User> mUserList = _userServices.getUsers();
+            mUserSession.setData(mUserList);
+            mUserSession.setStatus(HttpStatus.OK);
+            return new ResponseEntity<>(mUserSession, HttpStatus.OK);
         } else {
+            mUserSession.setStatus(HttpStatus.UNAUTHORIZED);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<User>> getUserById(@RequestHeader("Authorization") String apiKey, @PathVariable("id") String id) {
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserSession> getUserById(@RequestHeader("Authorization") String apiKey, @PathVariable("id") String id) {
+
+        UserSession mUserSession = new UserSession();
+        mUserSession.setTargetURL("/api/user/" + id);
+        mUserSession.setUserId(id);
+        mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
+
         if (apiKey.equals(SystemInfo.authorizationKey)) {
-            return new ResponseEntity<>(_userServices.getUsers(), HttpStatus.OK);
+            User mUser = _userServices.getUserById(id);
+            mUserSession.setData(mUser);
+            mUserSession.setStatus(HttpStatus.OK);
+            return new ResponseEntity<>(mUserSession, HttpStatus.OK);
         } else {
+            mUserSession.setStatus(HttpStatus.UNAUTHORIZED);
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @RequestMapping(value = "/user/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserSession> insertUser(@RequestHeader("Authorization") String apiKey, @RequestBody User mUser) {
+
+        UserSession mUserSession = new UserSession();
+        mUserSession.setTargetURL("/api/user");
+        mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
+
         if (apiKey.equals(SystemInfo.authorizationKey)) {
-            _userServices.insertUser(mUser);
-            return new ResponseEntity<>(HttpStatus.OK);
+            String userId = _userServices.insertUser(mUser);
+            mUserSession.setUserId(userId);
+            mUserSession.setStatus(HttpStatus.CREATED);
+            return new ResponseEntity<>(mUserSession, HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            mUserSession.setStatus(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(mUserSession, HttpStatus.UNAUTHORIZED);
         }
+
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateUser(@RequestHeader("Authorization") String apiKey, @PathVariable("id") String id, @RequestBody User mUser) {
+    public ResponseEntity<UserSession> updateUser(@RequestHeader("Authorization") String apiKey, @PathVariable("id") String id, @RequestBody User mUser) {
+
+        UserSession mUserSession = new UserSession();
+        mUserSession.setTargetURL("/api/user/" + id);
+        mUserSession.setUserId(id);
+        mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
+
         if (apiKey.equals(SystemInfo.authorizationKey)) {
-            mUser.setId(apiKey);
-            _userServices.updateUser(mUser);
-            return new ResponseEntity<>(HttpStatus.OK);
+            mUser.setId(id);
+            User updateData = _userServices.updateUser(mUser);
+            mUserSession.setData(updateData);                   
+            mUserSession.setStatus(HttpStatus.OK);
+            return new ResponseEntity<>(mUserSession, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            mUserSession.setStatus(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(mUserSession, HttpStatus.UNAUTHORIZED);
         }
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteUser(@RequestHeader("Authorization") String apiKey, @PathVariable("id") String id) {
+    public ResponseEntity<UserSession> deleteUser(@RequestHeader("Authorization") String apiKey, @PathVariable("id") String id) {
+
+        UserSession mUserSession = new UserSession();
+        mUserSession.setTargetURL("/api/user/" + id);
+        mUserSession.setUserId(id);
+        mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
+
         if (apiKey.equals(SystemInfo.authorizationKey)) {
-            _userServices.deleteUser(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            if (_userServices.deleteUser(id)) {
+                mUserSession.setStatus(HttpStatus.OK);
+                return new ResponseEntity<>(mUserSession, HttpStatus.OK);
+            } else {
+                mUserSession.setStatus(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(mUserSession, HttpStatus.NOT_FOUND);
+            }
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            mUserSession.setStatus(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(mUserSession, HttpStatus.UNAUTHORIZED);
         }
     }
 
     @RequestMapping(value = "/userSession/{username}/{password}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserSession> getUserSession(@PathVariable("username") String username, @PathVariable("password") String password) {
         UserSession mUserSession = new UserSession();
-        
-        mUserSession.setUserId(username+password);
+
+        mUserSession.setUserId(username + password);
         mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
-        /*
-        APIProvisioning mAPIProvisioning = _APIProvisioningService.getAPIProvisioningInfoByUsernamePassword(username, password);
-        mUserSession.setUserId(mAPIProvisioning.getUserId());
-        mUserSession.setAuthorizationKey(mAPIProvisioning.getAuthorizationKey());
-        */
+
         return new ResponseEntity<>(mUserSession, HttpStatus.OK);
     }
 
