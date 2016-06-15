@@ -6,15 +6,14 @@
 package com.clientsbox.logic.services;
 
 import com.clientsbox.core.model.User;
-import com.clientsbox.core.model.UserSession;
 import java.util.List;
 
 public interface IUserService {
 
     public List<User> getUsers();
+    public User getUserById(String id);
+    public void insertUser(User mUser);
+    public void updateUser(User mUser);
+    public void deleteUser(String Id);
     
-    public UserSession getUserSessionByUsernamePassword(User mUser);
-    public UserSession registerUser(User mUser);
-    
-    public void updateGCMRegistrationIdByUserId(String  mUserId, String GCMRegistrationId);
 }

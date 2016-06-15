@@ -5,7 +5,7 @@ public class UserSession {
     public String userId;
     public String targetURL;
     public String accessToken;
-    public String mAuthorizationKey;
+    public String authorizationKey;
 
     public String getUserId() {
         return userId;
@@ -31,15 +31,14 @@ public class UserSession {
         this.accessToken = accessToken;
     }
 
-    public String getmAuthorizationKey() {
-        return mAuthorizationKey;
+    public String getAuthorizationKey() {
+        return authorizationKey;
     }
 
-    public void setmAuthorizationKey(String mAuthorizationKey) {
-        this.mAuthorizationKey = mAuthorizationKey;
+    public void setAuthorizationKey(String authorizationKey) {
+        this.authorizationKey = authorizationKey;
     }
 
-  
     
     
 }

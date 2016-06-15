@@ -49,7 +49,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     }
 
     @Override
-    public void insertUser(User mUser, UserSession mUserSession) {
+    public String insertUser(User mUser, UserSession mUserSession) {
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
         
@@ -58,10 +58,11 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
 
-            this.sendPost(mUserSession, array.getJSONObject(0));
+            return this.sendPost(mUserSession, array.getJSONObject(0));
         } catch (JSONException ex) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     @Override
@@ -79,7 +80,12 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     }
 
     @Override
-    public void deleteUser(User mUser, UserSession mUserSession) {
+    public void deleteUser(String id, UserSession mUserSession) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User getUserInfoByUsernamePassword(String mUsername, String Password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

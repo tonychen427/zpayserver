@@ -49,7 +49,7 @@ public class HttpConnectionHelper {
         return response.toString();
     }
 
-    protected void sendPost(UserSession mUserSession, JSONObject json) {
+    protected String sendPost(UserSession mUserSession, JSONObject json) {
         HttpURLConnection connection = null;
         try {
             URL url = new URL(mUserSession.getTargetURL());
@@ -74,15 +74,15 @@ public class HttpConnectionHelper {
                     bufferedReader.close();
 
                     //Log.d("test", stringBuilder.toString());
-                    //return stringBuilder.toString();
+                    return stringBuilder.toString();
                 }
             } else {
                 //Log.e("test", connection.getResponseMessage());
-                //return null;
+                return null;
             }
         } catch (Exception exception) {
             //Log.e("test", exception.toString());
-            //return null;
+            return null;
         } finally {
             if (connection != null) {
                 connection.disconnect();
