@@ -1,0 +1,21 @@
+{
+  "name": "zpayserver",
+  "homepage": "https://github.com/tonychen427/zpayserver",
+  "authors": [
+    "Tony Chen <tony.chen@8x8.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/lib/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    
+  }
+}

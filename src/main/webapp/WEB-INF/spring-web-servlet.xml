@@ -31,8 +31,8 @@
         <mvc:resources mapping="/font/**" location="/views/font/"/>
         <mvc:resources mapping="/fonts/**" location="/views/fonts/"/>
         <mvc:resources mapping="/images/**" location="/views/images/"/>
-        <mvc:resources mapping="/bower_components/**" location="/bower_components/" />
- 
+        <mvc:resources mapping="/bower_components/**" location="/views/bower_components/" />
+                                         
 	<mvc:annotation-driven />
 	
 </beans>

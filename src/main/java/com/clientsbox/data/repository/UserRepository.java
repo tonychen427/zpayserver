@@ -49,7 +49,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     }
 
     @Override
-    public void createUser(User mUser, UserSession mUserSession) {
+    public void insertUser(User mUser, UserSession mUserSession) {
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
         
