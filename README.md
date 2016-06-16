@@ -6,7 +6,7 @@ restaurant through greater efficiencies and targeted promotions.
 
 
 
-#### zPay API ####
+#### zPay - User API ####
 
 Header Content-Type  : application/json  
 Header Authorization : 9605774e-b76a-48f7-a92a-15b2a2bd0a4b
@@ -48,3 +48,5 @@ PUT: http://localhost:8080/api/user/{id}
   }
 
 ```
+
+#### zPay - FCM API ####

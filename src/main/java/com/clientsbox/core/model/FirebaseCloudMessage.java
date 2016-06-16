@@ -1,11 +1,9 @@
 package com.clientsbox.core.model;
 
-import java.util.List;
-
 public class FirebaseCloudMessage {
     
     public String data;
-    public List<String> fcm_deviceRegIds;
+    public String notificationUserId;
 
     public String getData() {
         return data;
@@ -15,12 +13,12 @@ public class FirebaseCloudMessage {
         this.data = data;
     }
 
-    public List<String> getFcm_deviceRegIds() {
-        return fcm_deviceRegIds;
+    public String getNotificationUserId() {
+        return notificationUserId;
     }
 
-    public void setFcm_deviceRegIds(List<String> fcm_deviceRegIds) {
-        this.fcm_deviceRegIds = fcm_deviceRegIds;
+    public void setNotificationUserId(String notificationUserId) {
+        this.notificationUserId = notificationUserId;
     }
- 
+
 }
