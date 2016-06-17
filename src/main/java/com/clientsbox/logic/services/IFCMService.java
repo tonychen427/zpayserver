@@ -1,9 +1,9 @@
 package com.clientsbox.logic.services;
 
-import com.clientsbox.core.model.FirebaseCloudMessage;
+import com.clientsbox.core.model.CloudMessage;
 
 public interface IFCMService {
 
-    public boolean SendDownstreamMessage (FirebaseCloudMessage mFirebaseCloudMessage, String mAuthorizationKey);
+    public boolean SendDownstreamMessage (CloudMessage mCloudMessage);
     
 }

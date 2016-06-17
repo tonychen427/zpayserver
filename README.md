@@ -1,8 +1,9 @@
 ## zPay Server ##
  
-   zPay makes it quicker and easier for your customers to pay for their meals. 
-But besides a great user experience, zPay also helps increase revenues at your 
-restaurant through greater efficiencies and targeted promotions.
+Place the zPay QR Code anywhere - Customers scan the QR Code and you're paid in seconds. 
+Payments are quick, secure and effortless and you spend less time and money taking payments 
+and chasing up invoices. Cash flow improves, sales increase, costs decrease and customers 
+enjoy buying from you.
 
 
 
