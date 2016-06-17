@@ -1,3 +1,6 @@
+
+<img src="http://maggie.clientsbox.com/img/zpay.png">
+
 ## zPay Server ##
  
 Place the zPay QR Code anywhere - Customers scan the QR Code and you're paid in seconds. 
