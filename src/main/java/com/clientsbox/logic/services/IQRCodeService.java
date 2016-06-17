@@ -11,5 +11,5 @@ package com.clientsbox.logic.services;
 import java.io.ByteArrayOutputStream;
 
 public interface IQRCodeService {
-    public ByteArrayOutputStream getQRCodeBytesStream (String text);
+    public byte[] getQRCodeBytesStream (String text);
 }

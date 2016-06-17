@@ -25,8 +25,9 @@ public class qrCodeController {
     @RequestMapping(value = "qrcode/{qrInfo:.+}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
     public  byte[] qrCode (@PathVariable("qrInfo")String qrInfo) {
             
-            ByteArrayOutputStream in = _qrCodeService.getQRCodeBytesStream(qrInfo);
-            return in.toByteArray();
+            //ByteArrayOutputStream in = _qrCodeService.getQRCodeBytesStream(qrInfo);
+            //return in.toByteArray();
+        return _qrCodeService.getQRCodeBytesStream(qrInfo);
     }
     
 }
