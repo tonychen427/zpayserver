@@ -87,6 +87,15 @@
             <artifactId>javase</artifactId>
             <version>2.2</version>
         </dependency>
+        
+        
+        <!-- http://mvnrepository.com/artifact/fr.opensagres.xdocreport.appengine-awt/appengine-awt -->
+        <dependency>
+            <groupId>fr.opensagres.xdocreport.appengine-awt</groupId>
+            <artifactId>appengine-awt</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
