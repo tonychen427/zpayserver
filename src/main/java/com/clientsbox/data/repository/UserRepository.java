@@ -1,5 +1,6 @@
 package com.clientsbox.data.repository;
 
+import com.clientsbox.core.constant.SystemInfo;
 import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.helper.HttpConnectionHelper;
@@ -17,9 +18,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository extends HttpConnectionHelper implements IUserRepository {
 
+    
+    
     @Override
     public List<User> getAllUsers(UserSession mUserSession) {
-        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users.json");
+        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users.json");
         String result = this.sendGet(mUserSession);
 
         Gson gson = new Gson();
@@ -48,7 +51,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     public User getUserById(String id, UserSession mUserSession) {
 
         Gson gson = new Gson();
-        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users/" + id + ".json");
+        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users/" + id + ".json");
         String result = this.sendGet(mUserSession);
         User mUser = gson.fromJson(result, User.class);
         mUser.setId(id);
@@ -61,7 +64,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
 
-        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users.json");
+        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users.json");
 
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
@@ -80,7 +83,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     public User updateUser(User mUser, UserSession mUserSession) {
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
-        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users/" + mUser.getId() + ".json");
+        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users/" + mUser.getId() + ".json");
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
             mUserSession.setData(array.getJSONObject(0));
@@ -96,7 +99,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
 
     @Override
     public boolean deleteUser(String id, UserSession mUserSession) {
-        mUserSession.setTargetURL("https://zpayworld-1339.firebaseio.com/users/" + id + ".json");
+        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users/" + id + ".json");
         return this.sendDelete(mUserSession) == HttpURLConnection.HTTP_OK;
     }
 

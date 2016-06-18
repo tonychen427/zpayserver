@@ -6,17 +6,8 @@
 package com.clientsbox.logic.services;
 
 import com.clientsbox.data.repository.IQRCodeRepository;
-import com.google.code.appengine.awt.Graphics2D;
-import com.google.code.appengine.awt.image.BufferedImage;
-import com.google.code.appengine.awt.image.RenderedImage;
-import com.google.code.appengine.imageio.ImageIO;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
