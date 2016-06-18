@@ -22,12 +22,7 @@
         <appengine.sdk.version>1.9.38</appengine.sdk.version>  
         <jstl.version>1.2</jstl.version>     
     </properties>
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
+
     <dependencies>    
         <dependency>
             <groupId>org.springframework</groupId>
@@ -68,14 +63,7 @@
             <artifactId>gson</artifactId>
             <version>2.6.2</version>
         </dependency>
-        
-        <dependency>
-            <groupId>com.github.kenglxn.qrgen</groupId>
-            <artifactId>javase</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-        
-        
+               
         <dependency>
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
