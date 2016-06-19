@@ -13,5 +13,5 @@ import com.clientsbox.core.model.UserSession;
  * @author Insprion
  */
 public interface IFCMRepository {
-    public boolean SendDownstreamMessage (FirebaseCloudMessage mFirebaseCloudMessage, UserSession mUserSession);
+    public String SendDownstreamMessage (FirebaseCloudMessage mFirebaseCloudMessage, UserSession mUserSession);
 }

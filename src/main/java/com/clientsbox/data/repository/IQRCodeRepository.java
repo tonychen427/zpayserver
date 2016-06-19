@@ -12,6 +12,8 @@ import java.io.ByteArrayOutputStream;
  * @author ttran
  */
 public interface IQRCodeRepository {
-    
-    public ByteArrayOutputStream getQRCode(String mText, int width, int height );
+
+    public ByteArrayOutputStream getQRCode(String mText, int width, int height);
+
+    public ByteArrayOutputStream getQRCodeWithLogo(String mText, int width, int height);
 }

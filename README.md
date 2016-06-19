@@ -54,3 +54,14 @@ PUT: http://localhost:8080/api/user/{id}
 ```
 
 #### zPay - FCM API ####
+
+PUT http://localhost:8080/api/fcm
+```json
+
+{
+    "fromUserId": "-KKXhVmO_qxQY-xBjsSh",
+    "sendUserId": "-KK_TUvvbX3Q78j2JRYM",
+    "data": "Whatever you want"
+}
+
+```

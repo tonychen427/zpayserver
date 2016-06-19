@@ -7,6 +7,7 @@ package com.clientsbox.logic.services;
 
 import com.clientsbox.core.model.CloudMessage;
 import com.clientsbox.core.model.FirebaseCloudMessage;
+import com.clientsbox.core.model.FirebaseCloudMessage.data;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.IFCMRepository;
 import com.clientsbox.data.repository.IUserRepository;
@@ -30,10 +31,13 @@ public class FCMService implements IFCMService {
        
         FirebaseCloudMessage mFirebaseCloudMessage = new FirebaseCloudMessage();
         
+        data mData = new data();
+        mData.setMessage(mCloudMessage.getData());
         
-        
-        boolean successful = _fcmRepository.SendDownstreamMessage(mFirebaseCloudMessage, mUserSession);
-        return true;
+        mFirebaseCloudMessage.setTo(mSendUserDeviceId);
+        mFirebaseCloudMessage.setData(mData);
+        String successful = _fcmRepository.SendDownstreamMessage(mFirebaseCloudMessage, mUserSession);
+        return successful.toLowerCase().equals("success");
     }
 
 }

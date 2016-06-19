@@ -22,7 +22,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     
     @Override
     public List<User> getAllUsers(UserSession mUserSession) {
-        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users.json");
+        mUserSession.setTargetURL(SystemInfo.firebaseDatabaseUrl + "/users.json");
         String result = this.sendGet(mUserSession);
 
         Gson gson = new Gson();
@@ -51,7 +51,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     public User getUserById(String id, UserSession mUserSession) {
 
         Gson gson = new Gson();
-        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users/" + id + ".json");
+        mUserSession.setTargetURL(SystemInfo.firebaseDatabaseUrl + "/users/" + id + ".json");
         String result = this.sendGet(mUserSession);
         User mUser = gson.fromJson(result, User.class);
         mUser.setId(id);
@@ -64,7 +64,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
 
-        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users.json");
+        mUserSession.setTargetURL(SystemInfo.firebaseDatabaseUrl + "/users.json");
 
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
@@ -83,7 +83,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
     public User updateUser(User mUser, UserSession mUserSession) {
         Gson gson = new Gson();
         String mData = gson.toJson(mUser);
-        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users/" + mUser.getId() + ".json");
+        mUserSession.setTargetURL(SystemInfo.firebaseDatabaseUrl + "/users/" + mUser.getId() + ".json");
         try {
             JSONArray array = new JSONArray("[" + mData + "]");
             mUserSession.setData(array.getJSONObject(0));
@@ -99,7 +99,7 @@ public class UserRepository extends HttpConnectionHelper implements IUserReposit
 
     @Override
     public boolean deleteUser(String id, UserSession mUserSession) {
-        mUserSession.setTargetURL(SystemInfo.databaseUrl + "/users/" + id + ".json");
+        mUserSession.setTargetURL(SystemInfo.firebaseDatabaseUrl + "/users/" + id + ".json");
         return this.sendDelete(mUserSession) == HttpURLConnection.HTTP_OK;
     }
 

@@ -28,17 +28,17 @@ public class FCMRestfulController {
     @Autowired
     IUserService _userService;
 
-    @RequestMapping(value = "/fcm/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserSession> sendFireBaseMessage(@RequestHeader("Authorization") String apiKey, @PathVariable("id") String id, @RequestBody CloudMessage mCloudMessage) {
+    @RequestMapping(value = "/fcm", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserSession> sendFireBaseMessage(@RequestHeader("Authorization") String apiKey, @RequestBody CloudMessage mCloudMessage) {
       
          UserSession mUserSession = new UserSession();
-        mUserSession.setTargetURL("/api/fcm/" + id);
-        mUserSession.setUserId(id);
+        mUserSession.setTargetURL("/api/fcm");
+        mUserSession.setUserId(mCloudMessage.fromUserId);
         mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
             
         if (apiKey.equals(SystemInfo.authorizationKey)) {
            
-            mCloudMessage.setFromUserId(id);
+            mCloudMessage.setFromUserId(mCloudMessage.fromUserId);
             boolean mSuccessful = _fcmService.SendDownstreamMessage(mCloudMessage);
             mUserSession.setStatus(HttpStatus.OK);
             mUserSession.setData(mSuccessful);

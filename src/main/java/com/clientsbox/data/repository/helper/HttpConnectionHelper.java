@@ -5,6 +5,7 @@
  */
 package com.clientsbox.data.repository.helper;
 
+import com.clientsbox.core.constant.SystemInfo;
 import com.clientsbox.core.model.UserSession;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -97,8 +98,8 @@ public class HttpConnectionHelper {
             connection.setDoInput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
-            //connection.setRequestProperty("Authorization", "key=" + gcm.getGcmAPIKey());
+            //connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Authorization", "key=" + SystemInfo.firebaseServerId);
             OutputStreamWriter streamWriter = new OutputStreamWriter(connection.getOutputStream());
             streamWriter.write( mUserSession.getData().toString());
             streamWriter.flush();
@@ -117,7 +118,7 @@ public class HttpConnectionHelper {
                 }
             } else {
                 //Log.e("test", connection.getResponseMessage());
-                return null;
+                return connection.getResponseMessage();
             }
         } catch (Exception exception) {
             //Log.e("test", exception.toString());
