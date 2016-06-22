@@ -8,7 +8,7 @@ Payments are quick, secure and effortless and you spend less time and money taki
 and chasing up invoices. Cash flow improves, sales increase, costs decrease and customers 
 enjoy buying from you.
 
-#### zPay - APIProvisioning API ####  
+#### zPay - APIProvisioning API ####
 
 GET: localhost:8080/api/APIProvisionings  
 
@@ -24,7 +24,7 @@ POST http://localhost:8080/api/APIProvisioning/
 
 ```
 
-#### zPay - AccessToken API ####  
+#### zPay - AccessToken API ####
 
 Header Content-Type  : application/json  
 Header Authorization : << APIProvisioningKey >>  
