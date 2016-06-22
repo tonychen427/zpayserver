@@ -8,12 +8,11 @@ Payments are quick, secure and effortless and you spend less time and money taki
 and chasing up invoices. Cash flow improves, sales increase, costs decrease and customers 
 enjoy buying from you.
 
-#### zPay - APIProvisioning API ####
+#### zPay - APIProvisioning API ####  
 
-GET: localhost:8080/api/APIProvisionings
+GET: localhost:8080/api/APIProvisionings  
 
 POST http://localhost:8080/api/APIProvisioning/
-
 ```json
 
     {
@@ -25,11 +24,12 @@ POST http://localhost:8080/api/APIProvisioning/
 
 ```
 
-#### zPay - AccessToken API ####
-POST http://localhost:8080/api/requestToken/
-Header Content-Type  : application/json  
-Header Authorization : <<APIProvisioningKey>>
+#### zPay - AccessToken API ####  
 
+Header Content-Type  : application/json  
+Header Authorization : << APIProvisioningKey >>  
+
+POST http://localhost:8080/api/requestToken/
 ```json
 
     {
@@ -43,7 +43,7 @@ Header Authorization : <<APIProvisioningKey>>
 #### zPay - User API ####
 
 Header Content-Type  : application/json  
-Header Authorization : Bearer <<accessToken>>
+Header Authorization : Bearer << accessToken >>
 
 GET: localhost:8080/api/users
 
