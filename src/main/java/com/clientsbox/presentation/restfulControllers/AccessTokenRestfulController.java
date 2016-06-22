@@ -1,5 +1,4 @@
 //https://code.exacttarget.com/apis-sdks/rest-api/using-the-api-key-to-authenticate-api-calls.html
-
 package com.clientsbox.presentation.restfulControllers;
 
 import com.clientsbox.core.model.APIProvisioning;
@@ -27,20 +26,20 @@ public class AccessTokenRestfulController {
 
     @Autowired
     IAPIProvisioningService _APIProvisioningService;
-    
+
     @Autowired
     IUserService _userService;
-    
+
     @Autowired
     IUserAccessTokenService _userAccessTokenService;
 
     @RequestMapping(value = "/requestToken", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserSession> getUserList(@RequestHeader("Authorization") String apiKey, @RequestBody User mUser) {
-        
+
         UserSession mUserSession = new UserSession();
 
         UserAccessToken mAccessToken = _userAccessTokenService.getUserAccessTokenbyUserIdDeviceId(apiKey, mUser.getId(), mUser.getFcm_deviceRegId());
-                
+        mUserSession.setTargetURL("/api/requestToken");
         mUserSession.setApiKey(apiKey);
         mUserSession.setAccessToken(mAccessToken.getAccessToken());
         mUserSession.setData("");

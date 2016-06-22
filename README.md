@@ -13,8 +13,10 @@ enjoy buying from you.
 GET: localhost:8080/api/APIProvisionings  
 
 POST http://localhost:8080/api/APIProvisioning/
-```json
 
+```json
+    Request
+    
     {
         "firstName":"Bill",
         "lastName":"Clinton",
@@ -22,9 +24,21 @@ POST http://localhost:8080/api/APIProvisioning/
         "email":"b.clinton@zpay.com"
     }
 
+    Response
+    {
+        "targetURL": "/api/APIProvisioning",
+        "apiKey": "9605774e-b76a-48f7-a92a-15b2a2bd0a4b",
+        "accessToken": null,
+        "data": null,
+        "status": "CREATED"
+    }
+
 ```
 
 #### zPay - AccessToken API ####
+You should NOT request a new access token for every API call you make  
+each access token is good for every time device request and should be reused. 
+Making two API calls for every one operation is inefficient and may result in throttling.
 
 Header Content-Type  : application/json  
 Header Authorization : << APIProvisioningKey >>  
@@ -32,6 +46,7 @@ Header Authorization : << APIProvisioningKey >>
 POST http://localhost:8080/api/requestToken/
 ```json
 
+    Request
     {
         "id" : "-KKqnRHJf38NweW1k_x9",
         "fcm_deviceRegId" : "ab4801f0-331d-11e6-bdf4-0852698d45d2"
