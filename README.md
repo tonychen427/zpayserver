@@ -36,8 +36,8 @@ POST http://localhost:8080/api/APIProvisioning/
 ```
 
 #### zPay - AccessToken API ####
-You should NOT request a new access token for every API call you make  
-each access token is good for every time device request and should be reused. 
+You should NOT request a new access token for every API call you make,  
+each access token is good for every time the device requested and should be reused. 
 Making two API calls for every one operation is inefficient and may result in throttling.
 
 Header Content-Type  : application/json  
@@ -52,6 +52,14 @@ POST http://localhost:8080/api/requestToken/
         "fcm_deviceRegId" : "ab4801f0-331d-11e6-bdf4-0852698d45d2"
     }
 
+    Response
+    {
+        "targetURL": "/api/requestToken",
+        "apiKey": "9605774e-b76a-48f7-a92a-15b2a2bd0a4b",
+        "accessToken": "1154a33b-bd07-4b6e-80a8-4a35ec199ade",
+        "data": "",
+        "status": "OK"
+    }
 ```
 
 
