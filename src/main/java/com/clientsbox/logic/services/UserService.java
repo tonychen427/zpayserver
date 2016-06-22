@@ -36,9 +36,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(User mUser) {
+    public User updateUser(String id, User mUser) {
         UserSession mUserSession = new UserSession();
-        return _userRepository.updateUser(mUser, mUserSession);        
+        return _userRepository.updateUser(id, mUser, mUserSession);        
     }
 
     @Override

@@ -93,8 +93,7 @@ public class UserRestfulController {
         mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
 
         if (apiKey.equals(SystemInfo.authorizationKey)) {
-            mUser.setId(id);
-            User updateData = _userServices.updateUser(mUser);
+            User updateData = _userServices.updateUser(id, mUser);
             mUserSession.setData(updateData);                   
             mUserSession.setStatus(HttpStatus.OK);
             return new ResponseEntity<>(mUserSession, HttpStatus.OK);

@@ -1,7 +1,7 @@
 package com.clientsbox.logic.services;
 
 import com.clientsbox.core.model.APIProvisioning;
-import com.clientsbox.core.model.User;
+import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.IAPIProvisioningRepository;
 import com.clientsbox.data.repository.IUserRepository;
 import java.util.List;
@@ -10,36 +10,41 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class APIProvisioningService implements IAPIProvisioningService {
-    
+
     @Autowired
     IUserRepository _userRepository;
-    
+
     @Autowired
     IAPIProvisioningRepository _apiProvisioningRepository;
 
     @Override
     public List<APIProvisioning> getAllAPIProvisioning() {
-        return _apiProvisioningRepository.getAllAPIProvisioning();
+        UserSession mUserSession = new UserSession();
+        return _apiProvisioningRepository.getAllAPIProvisioning(mUserSession);
     }
 
     @Override
     public APIProvisioning getAPIProvisioningById(String id) {
-        return _apiProvisioningRepository.getAPIProvisioningById(id);
+        UserSession mUserSession = new UserSession();
+        return _apiProvisioningRepository.getAPIProvisioningById(id, mUserSession);
     }
 
     @Override
-    public void insertAPIProvisioning(APIProvisioning mAPIProvisioning) {
-        _apiProvisioningRepository.insertAPIProvisioning(mAPIProvisioning);
+    public String insertAPIProvisioning(APIProvisioning mAPIProvisioning) {
+        UserSession mUserSession = new UserSession();
+        return _apiProvisioningRepository.insertAPIProvisioning(mAPIProvisioning, mUserSession);
     }
 
     @Override
-    public void updateAPIProvisioning(APIProvisioning mAPIProvisioning) {
-        _apiProvisioningRepository.updateAPIProvisioning(mAPIProvisioning);
+    public APIProvisioning updateAPIProvisioning(String id, APIProvisioning mAPIProvisioning) {
+        UserSession mUserSession = new UserSession();
+        return _apiProvisioningRepository.updateAPIProvisioning(id, mAPIProvisioning, mUserSession);
     }
 
     @Override
-    public void deleteAPIProvisioning(String Id) {
-        _apiProvisioningRepository.deleteAPIProvisioning(Id);
+    public boolean deleteAPIProvisioning(String Id) {
+        UserSession mUserSession = new UserSession();
+        return _apiProvisioningRepository.deleteAPIProvisioning(Id, mUserSession);
     }
 
 }

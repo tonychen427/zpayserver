@@ -2,8 +2,6 @@ package com.clientsbox.presentation.restfulControllers;
 
 import com.clientsbox.core.constant.SystemInfo;
 import com.clientsbox.core.model.CloudMessage;
-import com.clientsbox.core.model.FirebaseCloudMessage;
-import com.clientsbox.core.model.User;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.logic.services.IFCMService;
 import com.clientsbox.logic.services.IUserService;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;

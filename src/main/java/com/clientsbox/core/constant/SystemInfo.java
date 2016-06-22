@@ -7,4 +7,7 @@ public class SystemInfo {
     public static final String firebaseDatabaseUrl = "https://zpay-qrcode.firebaseio.com";
     public static final String firebaseFCMUrl = "https://fcm.googleapis.com/fcm/send";
     
+    public static final String DbNameApiProvisioning = "apiProvisioning";
+    public static final String DbNameUsers = "users";
+    
 }

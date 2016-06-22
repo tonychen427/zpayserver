@@ -10,11 +10,11 @@ public interface IAPIProvisioningService {
 
     public APIProvisioning getAPIProvisioningById(String id);
     
-    public void insertAPIProvisioning(APIProvisioning mAPIProvisioning);
+    public String insertAPIProvisioning(APIProvisioning mAPIProvisioning);
 
-    public void updateAPIProvisioning(APIProvisioning mAPIProvisioning);
+    public APIProvisioning updateAPIProvisioning(String id, APIProvisioning mAPIProvisioning);
 
-    public void deleteAPIProvisioning(String Id);
+    public boolean deleteAPIProvisioning(String Id);
     
 
    
