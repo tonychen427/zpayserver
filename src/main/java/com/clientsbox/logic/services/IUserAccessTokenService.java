@@ -27,4 +27,9 @@ public interface IUserAccessTokenService {
     public boolean deleteUserAccessToken(String id);
     
     
+    public UserAccessToken getUserAccessTokenbyUserIdDeviceId (String mAPIKey, String mUserId, String mDeviceId);
+    
+    public List<UserAccessToken> getAccessToken(final String mAccessTokenValid) ;
+    
+    
 }

@@ -3,20 +3,13 @@ package com.clientsbox.core.model;
 import org.springframework.http.HttpStatus;
 
 public class UserSession {
-   
-    public String userId;
+       
     public String targetURL;
-    public String authorizationKey;
+    public String apiKey;
+    public String accessToken;
     public Object data;
     public HttpStatus status;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+   
 
     public String getTargetURL() {
         return targetURL;
@@ -26,12 +19,20 @@ public class UserSession {
         this.targetURL = targetURL;
     }
 
-    public String getAuthorizationKey() {
-        return authorizationKey;
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public void setAuthorizationKey(String authorizationKey) {
-        this.authorizationKey = authorizationKey;
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public Object getData() {
@@ -49,5 +50,7 @@ public class UserSession {
     public void setStatus(HttpStatus status) {
         this.status = status;
     }
+
+  
 
 }

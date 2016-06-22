@@ -15,7 +15,5 @@ public interface IAPIProvisioningService {
     public APIProvisioning updateAPIProvisioning(String id, APIProvisioning mAPIProvisioning);
 
     public boolean deleteAPIProvisioning(String Id);
-    
-
    
 }

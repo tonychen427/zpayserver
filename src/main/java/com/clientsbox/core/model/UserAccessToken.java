@@ -3,6 +3,8 @@ package com.clientsbox.core.model;
 public class UserAccessToken {
     public String id;
     public String userId;
+    public String apiKey;
+    public String deviceId;
     public String accessToken;
 
     public String getId() {
@@ -21,6 +23,22 @@ public class UserAccessToken {
         this.userId = userId;
     }
 
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
     public String getAccessToken() {
         return accessToken;
     }
@@ -28,5 +46,9 @@ public class UserAccessToken {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
+
+  
+
+
     
 }

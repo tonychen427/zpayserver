@@ -35,6 +35,6 @@ public class QRCodeService implements IQRCodeService {
 
         ByteArrayOutputStream baos = _qrCodeRepository.getQRCode(text, 250, 250);
         ByteArrayOutputStream baos2 = _qrCodeRepository.getQRCodeWithLogo(text, 250, 250);
-        return baos2.toByteArray();
+        return baos.toByteArray();
     }
 }

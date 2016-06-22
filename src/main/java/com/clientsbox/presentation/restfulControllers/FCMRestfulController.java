@@ -30,8 +30,8 @@ public class FCMRestfulController {
       
          UserSession mUserSession = new UserSession();
         mUserSession.setTargetURL("/api/fcm");
-        mUserSession.setUserId(mCloudMessage.fromUserId);
-        mUserSession.setAuthorizationKey(SystemInfo.authorizationKey);
+       // mUserSession.setUserId(mCloudMessage.fromUserId);
+        mUserSession.setApiKey(SystemInfo.authorizationKey);
             
         if (apiKey.equals(SystemInfo.authorizationKey)) {
            

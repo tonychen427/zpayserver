@@ -4,7 +4,10 @@ import com.clientsbox.core.model.APIProvisioning;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.data.repository.IAPIProvisioningRepository;
 import com.clientsbox.data.repository.IUserRepository;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,8 @@ public class APIProvisioningService implements IAPIProvisioningService {
     @Override
     public String insertAPIProvisioning(APIProvisioning mAPIProvisioning) {
         UserSession mUserSession = new UserSession();
+        mAPIProvisioning.setAuthorizationKey(UUID.randomUUID().toString());
+        mAPIProvisioning.setCreateDateTime(new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new Date()));
         return _apiProvisioningRepository.insertAPIProvisioning(mAPIProvisioning, mUserSession);
     }
 

@@ -8,12 +8,42 @@ Payments are quick, secure and effortless and you spend less time and money taki
 and chasing up invoices. Cash flow improves, sales increase, costs decrease and customers 
 enjoy buying from you.
 
+#### zPay - APIProvisioning API ####
+
+GET: localhost:8080/api/APIProvisionings
+
+POST http://localhost:8080/api/APIProvisioning/
+
+```json
+
+    {
+        "firstName":"Bill",
+        "lastName":"Clinton",
+        "phone":"408-555-8888",
+        "email":"b.clinton@zpay.com"
+    }
+
+```
+
+#### zPay - AccessToken API ####
+POST http://localhost:8080/api/requestToken/
+Header Content-Type  : application/json  
+Header Authorization : <<APIProvisioningKey>>
+
+```json
+
+    {
+        "id" : "-KKqnRHJf38NweW1k_x9",
+        "fcm_deviceRegId" : "ab4801f0-331d-11e6-bdf4-0852698d45d2"
+    }
+
+```
 
 
 #### zPay - User API ####
 
 Header Content-Type  : application/json  
-Header Authorization : 9605774e-b76a-48f7-a92a-15b2a2bd0a4b
+Header Authorization : Bearer <<accessToken>>
 
 GET: localhost:8080/api/users
 

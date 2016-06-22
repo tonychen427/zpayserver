@@ -1,17 +1,20 @@
+//https://code.exacttarget.com/apis-sdks/rest-api/using-the-api-key-to-authenticate-api-calls.html
+
 package com.clientsbox.presentation.restfulControllers;
 
 import com.clientsbox.core.model.APIProvisioning;
 import com.clientsbox.core.model.User;
+import com.clientsbox.core.model.UserAccessToken;
 import com.clientsbox.core.model.UserSession;
 import com.clientsbox.logic.services.IAPIProvisioningService;
 import com.clientsbox.logic.services.IUserAccessTokenService;
+import com.clientsbox.logic.services.IUserService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,18 +23,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class AuthTokenRestfulController {
+public class AccessTokenRestfulController {
 
     @Autowired
     IAPIProvisioningService _APIProvisioningService;
+    
+    @Autowired
+    IUserService _userService;
+    
     @Autowired
     IUserAccessTokenService _userAccessTokenService;
 
-    @RequestMapping(value = "/requestToken/{userId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserSession> getUserList(@RequestHeader("Authorization") String authValue, @PathVariable("userId") String userId, @RequestBody User mUser) {
+    @RequestMapping(value = "/requestToken", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserSession> getUserList(@RequestHeader("Authorization") String apiKey, @RequestBody User mUser) {
+        
         UserSession mUserSession = new UserSession();
-        
-        
+
+        UserAccessToken mAccessToken = _userAccessTokenService.getUserAccessTokenbyUserIdDeviceId(apiKey, mUser.getId(), mUser.getFcm_deviceRegId());
+                
+        mUserSession.setApiKey(apiKey);
+        mUserSession.setAccessToken(mAccessToken.getAccessToken());
+        mUserSession.setData("");
+        mUserSession.setStatus(HttpStatus.OK);
         return new ResponseEntity<>(mUserSession, HttpStatus.OK);
     }
 
