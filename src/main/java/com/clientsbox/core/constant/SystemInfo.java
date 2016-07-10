@@ -10,5 +10,6 @@ public class SystemInfo {
     public static final String DbNameApiProvisioning = "apiProvisionings";
     public static final String DbNameUserAccessToken = "userAccessTokens";
     public static final String DbNameUsers = "users";
+    public static final String DbNameLogs = "logs";
     
 }

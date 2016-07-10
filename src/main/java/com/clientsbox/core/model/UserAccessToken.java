@@ -2,11 +2,17 @@ package com.clientsbox.core.model;
 
 public class UserAccessToken {
     public String id;
-    public String userId;
+    
     public String apiKey;
     public String deviceId;
     public String accessToken;
-
+    public String fcm_deviceRegId;
+    
+    public String userId;
+    public String deviceUniqueId;
+    public String fcmPushToken;
+    
+    
     public String getId() {
         return id;
     }
@@ -47,8 +53,28 @@ public class UserAccessToken {
         this.accessToken = accessToken;
     }
 
-  
+      public String getFcm_deviceRegId() {
+        return fcm_deviceRegId;
+    }
 
+    public void setFcm_deviceRegId(String fcm_deviceRegId) {
+        this.fcm_deviceRegId = fcm_deviceRegId;
+    }
 
+    public String getDeviceUniqueId() {
+        return deviceUniqueId;
+    }
+
+    public void setDeviceUniqueId(String deviceUniqueId) {
+        this.deviceUniqueId = deviceUniqueId;
+    }
+
+    public String getFcmPushToken() {
+        return fcmPushToken;
+    }
+
+    public void setFcmPushToken(String fcmPushToken) {
+        this.fcmPushToken = fcmPushToken;
+    }
     
 }

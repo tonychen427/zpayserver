@@ -10,7 +10,7 @@ public class User {
     public String email;
     public String mobile;
     public String userCategory;
-    public String fcm_deviceRegId;
+
 
     public String getId() {
         return id;
@@ -76,12 +76,5 @@ public class User {
         this.userCategory = userCategory;
     }
 
-    public String getFcm_deviceRegId() {
-        return fcm_deviceRegId;
-    }
-
-    public void setFcm_deviceRegId(String fcm_deviceRegId) {
-        this.fcm_deviceRegId = fcm_deviceRegId;
-    }
 
 }

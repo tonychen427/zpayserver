@@ -1,8 +1,10 @@
 package com.clientsbox.logic.services;
 
 import com.clientsbox.core.model.CloudMessage;
+import com.clientsbox.core.model.Log;
 import com.clientsbox.core.model.UserAccessToken;
 import com.clientsbox.core.model.UserSession;
+import com.clientsbox.data.repository.ILogRepository;
 import com.clientsbox.data.repository.IUserAccessTokenRepository;
 import com.clientsbox.logic.services.helper.xMatcherHelper;
 import com.clientsbox.logic.services.helper.xMatcherHelper.XMatcher;
@@ -22,6 +24,9 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
 
     @Autowired
     IFCMService _fcmService;
+
+    @Autowired
+    ILogRepository _LogRepository;
 
     @Override
     public List<UserAccessToken> getUserAccessTokenList() {
@@ -54,10 +59,15 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
     }
 
     @Override
-    public UserAccessToken getUserAccessTokenbyUserIdDeviceId(final String mAPIKey, final String mUserId, final String mDeviceId) {
+    public UserAccessToken getUserAccessTokenbyUserIdDeviceId(final String mAPIKey, final String mUserId, final String mDeviceId, final String mFCMPushToken) {
         final UserSession mUserSession = new UserSession();
         boolean isUserIdFound = false;
         boolean isDeviceIdFound = false;
+
+        Log mLog = new Log();
+        mLog.setErrorLevel("AccessToken UserId / deviceId");
+        mLog.setErrorMSg(mUserId + "  ||  " + mDeviceId);
+        _LogRepository.InsertLogs(mLog, mUserSession);
 
         List<UserAccessToken> mUserAccessToken = _userAccessTokenRepository.getAllUserAccessTokens(mUserSession);
 
@@ -66,11 +76,19 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
             public boolean xmatches(UserAccessToken t) {
                 boolean found = false;
                 if (t.getUserId().equals(mUserId)) {
-                    if (!(t.getDeviceId().equals(mDeviceId))) {
+                    if (!(t.getDeviceUniqueId().equals(mDeviceId))) {
+
                         //send fcm to logoff user
                         CloudMessage mCloudMessage = new CloudMessage();
-                        mCloudMessage.setSendUserId(mUserId);
-                        mCloudMessage.setData("{ 'task' : 'logoff' , 'deviceId' : '" + mDeviceId + "' }");
+                        mCloudMessage.setFromUserId(mFCMPushToken);
+                        mCloudMessage.setSendUserId(t.getFcmPushToken());
+                        mCloudMessage.setData("{ 'task' : 'logoff' , 'deviceId' : '" + t.getDeviceUniqueId() + "' }");
+
+                        Log mLog2 = new Log();
+                        mLog2.setErrorLevel("AccessToken UserId / deviceId / send token");
+                        mLog2.setErrorMSg(mUserId + "  ||  " + t.getDeviceUniqueId() + t.getFcmPushToken());
+                        _LogRepository.InsertLogs(mLog2, mUserSession);
+
                         _fcmService.SendDownstreamMessage(mCloudMessage);
                         _userAccessTokenRepository.deleteUserAccessToken(t.getId(), mUserSession);
                     } else {
@@ -90,8 +108,15 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
             mToken = new UserAccessToken();
             mToken.setApiKey(mAPIKey);
             mToken.setUserId(mUserId);
-            mToken.setDeviceId(mDeviceId);
+            mToken.setDeviceUniqueId(mDeviceId);
+            mToken.setFcmPushToken(mFCMPushToken);
             mToken.setAccessToken(UUID.randomUUID().toString());
+
+            Log mLog2 = new Log();
+            mLog2.setErrorLevel("setApiKey / setUserId / setDeviceId / setFcmPushToken / setAccessToken");
+            mLog2.setErrorMSg(mAPIKey + "  ||  " + mUserId + "  ||  "+ mDeviceId + "  ||  "+ mFCMPushToken + "  ||  "+ mToken.getAccessToken());
+            _LogRepository.InsertLogs(mLog2, mUserSession);
+
             _userAccessTokenRepository.insertUserAccessToken(mToken, mUserSession);
         }
 
@@ -115,7 +140,7 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
         });
 
         return searchAllMatchToken;
-        
+
 //        if (searchAllMatchToken.size() > 0) {
 //            return true;
 //        } else {

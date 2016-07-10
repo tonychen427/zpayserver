@@ -19,21 +19,25 @@ public class FCMService implements IFCMService {
 
     @Autowired
     IFCMRepository _fcmRepository;
-    
+
     @Autowired
     IUserRepository _userRepository;
+
     @Override
     public boolean SendDownstreamMessage(CloudMessage mCloudMessage) {
-        
+
         UserSession mUserSession = new UserSession();
-        String mFromUserDeviceId = _userRepository.getUserById(mCloudMessage.getFromUserId(), mUserSession).getFcm_deviceRegId();
-        String mSendUserDeviceId = _userRepository.getUserById(mCloudMessage.getSendUserId(), mUserSession).getFcm_deviceRegId();
-       
+//        String mFromUserDeviceId = _userRepository.getUserById(mCloudMessage.getFromUserId(), mUserSession).getFcm_deviceRegId();
+//        String mSendUserDeviceId = _userRepository.getUserById(mCloudMessage.getSendUserId(), mUserSession).getFcm_deviceRegId();
+
+        String mFromUserDeviceId = mCloudMessage.getFromUserId();
+        String mSendUserDeviceId = mCloudMessage.getSendUserId();
+
         FirebaseCloudMessage mFirebaseCloudMessage = new FirebaseCloudMessage();
-        
+
         data mData = new data();
         mData.setMessage(mCloudMessage.getData());
-        
+
         mFirebaseCloudMessage.setTo(mSendUserDeviceId);
         mFirebaseCloudMessage.setData(mData);
         String successful = _fcmRepository.SendDownstreamMessage(mFirebaseCloudMessage, mUserSession);

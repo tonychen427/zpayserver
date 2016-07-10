@@ -47,8 +47,9 @@ POST http://localhost:8080/api/requestToken/
 
     Request
     {
-        "id" : "-KKqnRHJf38NweW1k_x9",
-        "fcm_deviceRegId" : "ab4801f0-331d-11e6-bdf4-0852698d45d2"
+        "userId" : "-KKqnRHJf38NweW1k_x9",
+        "deviceUniqueId": "ab4801f0-331d-11e6-bdf4.....",
+        "fcmPushToken" : "ab4801f0-331d-11e6-bdf4-0852698d45d2"
     }
 
     Response
@@ -107,7 +108,7 @@ PUT: http://localhost:8080/api/user/{id}
 
 #### zPay - FCM API ####
 
-PUT http://localhost:8080/api/fcm
+POST http://localhost:8080/api/fcm
 ```json
 
 {

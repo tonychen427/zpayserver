@@ -34,11 +34,11 @@ public class AccessTokenRestfulController {
     IUserAccessTokenService _userAccessTokenService;
 
     @RequestMapping(value = "/requestToken", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserSession> getUserList(@RequestHeader("Authorization") String apiKey, @RequestBody User mUser) {
+    public ResponseEntity<UserSession> getUserList(@RequestHeader("Authorization") String apiKey, @RequestBody UserAccessToken mToken) {
 
         UserSession mUserSession = new UserSession();
 
-        UserAccessToken mAccessToken = _userAccessTokenService.getUserAccessTokenbyUserIdDeviceId(apiKey, mUser.getId(), mUser.getFcm_deviceRegId());
+        UserAccessToken mAccessToken = _userAccessTokenService.getUserAccessTokenbyUserIdDeviceId(apiKey, mToken.getUserId(), mToken.getDeviceUniqueId(), mToken.getFcmPushToken());
         mUserSession.setTargetURL("/api/requestToken");
         mUserSession.setApiKey(apiKey);
         mUserSession.setAccessToken(mAccessToken.getAccessToken());
