@@ -15,22 +15,23 @@ GET: localhost:8080/api/APIProvisionings
 POST http://localhost:8080/api/APIProvisioning/
 
 ```json
-    Request    
-    {
-        "firstName":"Bill",
-        "lastName":"Clinton",
-        "phone":"408-555-8888",
-        "email":"b.clinton@zpay.com"
-    }
 
-    Response
-    {
-        "targetURL": "/api/APIProvisioning",
-        "apiKey": "9605774e-b76a-48f7-a92a-15b2a2bd0a4b",
-        "accessToken": null,
-        "data": null,
-        "status": "CREATED"
-    }
+Request    
+{
+    "firstName":"Bill",
+    "lastName":"Clinton",
+    "phone":"408-555-8888",
+    "email":"b.clinton@zpay.com"
+}
+
+Response
+{
+    "targetURL": "/api/APIProvisioning",
+    "apiKey": "9605774e-b76a-48f7-a92a-15b2a2bd0a4b",
+    "accessToken": null,
+    "data": null,
+    "status": "CREATED"
+}
 
 ```
 
@@ -52,14 +53,15 @@ POST http://localhost:8080/api/requestToken/
         "fcmPushToken" : "ab4801f0-331d-11e6-bdf4-0852698d45d2"
     }
 
-    Response
-    {
-        "targetURL": "/api/requestToken",
-        "apiKey": "9605774e-b76a-48f7-a92a-15b2a2bd0a4b",
-        "accessToken": "1154a33b-bd07-4b6e-80a8-4a35ec199ade",
-        "data": "",
-        "status": "OK"
-    }
+Response
+{
+    "targetURL": "/api/requestToken",
+    "apiKey": "9605774e-b76a-48f7-a92a-15b2a2bd0a4b",
+    "accessToken": "1154a33b-bd07-4b6e-80a8-4a35ec199ade",
+    "data": "",
+    "status": "OK"
+}
+
 ```
 
 
@@ -77,7 +79,7 @@ DELETE: localhost:8080/api/user/{id}
 POST: http://localhost:8080/api/user/
 ```json
 
-  {
+{
     "firstname": "John",
     "lastname": "Smith",
     "username": "jsmith",
@@ -86,14 +88,14 @@ POST: http://localhost:8080/api/user/
     "mobile": "408-000-8888",
     "userCategory": "client",
     "fcm_deviceRegId": "ab4801f0-331d-11e6-bdf4-0852698d45d2"
-  }
+}
 
 ```
 
 PUT: http://localhost:8080/api/user/{id}
 ```json
 
-  {
+{
     "firstname": "Marry",
     "lastname": "Smith",
     "username": "msmith",
@@ -102,7 +104,7 @@ PUT: http://localhost:8080/api/user/{id}
     "mobile": "408-000-8888",
     "userCategory": "client",
     "fcm_deviceRegId": "ab4801f0-331d-11e6-bdf4-0852698d45d2"
-  }
+}
 
 ```
 
