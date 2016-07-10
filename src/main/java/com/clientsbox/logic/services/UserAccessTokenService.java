@@ -64,11 +64,6 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
         boolean isUserIdFound = false;
         boolean isDeviceIdFound = false;
 
-        Log mLog = new Log();
-        mLog.setErrorLevel("AccessToken UserId / deviceId");
-        mLog.setErrorMSg(mUserId + "  ||  " + mDeviceId);
-        _LogRepository.InsertLogs(mLog, mUserSession);
-
         List<UserAccessToken> mUserAccessToken = _userAccessTokenRepository.getAllUserAccessTokens(mUserSession);
 
         List<UserAccessToken> searchAllMatchToken = searchIn(mUserAccessToken, new XMatcher<UserAccessToken>() {
@@ -83,11 +78,6 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
                         mCloudMessage.setFromUserId(mFCMPushToken);
                         mCloudMessage.setSendUserId(t.getFcmPushToken());
                         mCloudMessage.setData("{ 'task' : 'logoff' , 'deviceId' : '" + t.getDeviceUniqueId() + "' }");
-
-                        Log mLog2 = new Log();
-                        mLog2.setErrorLevel("AccessToken UserId / deviceId / send token");
-                        mLog2.setErrorMSg(mUserId + "  ||  " + t.getDeviceUniqueId() + t.getFcmPushToken());
-                        _LogRepository.InsertLogs(mLog2, mUserSession);
 
                         _fcmService.SendDownstreamMessage(mCloudMessage);
                         _userAccessTokenRepository.deleteUserAccessToken(t.getId(), mUserSession);
@@ -111,11 +101,6 @@ public class UserAccessTokenService extends xMatcherHelper implements IUserAcces
             mToken.setDeviceUniqueId(mDeviceId);
             mToken.setFcmPushToken(mFCMPushToken);
             mToken.setAccessToken(UUID.randomUUID().toString());
-
-            Log mLog2 = new Log();
-            mLog2.setErrorLevel("setApiKey / setUserId / setDeviceId / setFcmPushToken / setAccessToken");
-            mLog2.setErrorMSg(mAPIKey + "  ||  " + mUserId + "  ||  "+ mDeviceId + "  ||  "+ mFCMPushToken + "  ||  "+ mToken.getAccessToken());
-            _LogRepository.InsertLogs(mLog2, mUserSession);
 
             _userAccessTokenRepository.insertUserAccessToken(mToken, mUserSession);
         }

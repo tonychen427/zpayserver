@@ -1,9 +1,10 @@
 package com.clientsbox.core.model;
 
 public class Log {
+
     public String id;
-    public String errorLevel;
-    public String errorMSg;
+    public String logType;
+    public String logMSg;
 
     public String getId() {
         return id;
@@ -13,19 +14,20 @@ public class Log {
         this.id = id;
     }
 
-    public String getErrorLevel() {
-        return errorLevel;
+    public String getLogType() {
+        return logType;
     }
 
-    public void setErrorLevel(String errorLevel) {
-        this.errorLevel = errorLevel;
+    public void setLogType(String logType) {
+        this.logType = logType;
     }
 
-    public String getErrorMSg() {
-        return errorMSg;
+    public String getLogMSg() {
+        return logMSg;
     }
 
-    public void setErrorMSg(String errorMSg) {
-        this.errorMSg = errorMSg;
-    }    
+    public void setLogMSg(String logMSg) {
+        this.logMSg = logMSg;
+    }
+
 }
